@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tamagochi</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="animal"></div>
+		<div class="stats">
+			<label for="hunger">Hunger</label>
+			<input type="range" disabled value="50" min="0" max="100" id="hunger" data-need="eat">
+			<label for="health">Health</label>
+			<input type="range" disabled data-need="cure" value="50" min="0" max="100" id="health">
+			<label for="happiness">Happiness</label>
+			<input type="range" disabled value="50" data-need="pet" min="0" max="100" id="happiness">
+		</div>
+		<div class="buttons">
+			<button id="eatBtn" data-need="eat">Eat</button>
+			<button id="cureBtn" data-need="cure">Cure</button>
+			<button id="petBtn" data-need="pet">Pet</button>
+		</div>
+		<button id="revive">Revive</button>
+	</div>
+
+<script src="js/code.js"></script>
+</body>
+</html>
