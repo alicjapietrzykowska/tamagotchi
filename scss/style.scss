@@ -32,9 +32,10 @@ body {
 	width: 70%;
 	height: 35%;
 	background-color: rgba(255,255,255, 0.7);
--webkit-box-shadow: inset -8px -8px 0px -1px rgba(0,0,0,0.6);
--moz-box-shadow: inset -8px -8px 0px -1px rgba(0,0,0,0.6);
-box-shadow: inset -8px -8px 0px -1px rgba(0,0,0,0.6);
+	border-radius: 5px;
+	-webkit-box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
+	-moz-box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
+	box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
 
 	.stats {
 		display: flex;
@@ -47,6 +48,20 @@ box-shadow: inset -8px -8px 0px -1px rgba(0,0,0,0.6);
 			}
 
 		}
+	}
+}
+.animal{
+	border-radius: 5px;
+	width: 95%;
+	margin: 0 auto;
+	background-color: rgba(255,255,255, 0.7);
+	-webkit-box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
+	-moz-box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
+	box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
+
+	img{
+		max-width: 130px;
+		padding: 10px;
 	}
 }
 
