@@ -6,7 +6,6 @@ function takeCare () {
 	stats.forEach(stat => {
 		if (stat.dataset.need === this.dataset.need){
 			stat.value++;
-			
 		}
 	});
 }
@@ -17,13 +16,16 @@ function decreaseStats () {
 		stats.forEach(stat => {
 			stat.value--;	
 			console.log(stat.value);
+			if (stat.value < 10) {
+
+			}
 			if (stat.value == 0) {
 				death();
 				clearInterval(called);
 				return;
 			}
 		});
-	}, 300000);
+	}, 60000);
 }
 
 
