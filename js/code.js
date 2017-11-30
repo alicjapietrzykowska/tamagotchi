@@ -24,6 +24,7 @@ function takeCare (e) {
 			}
 		});
 	}, 150)
+	checkMood();
 }
 
 const waitingIcons = ['cool', 'music', 'selfie'];
@@ -34,20 +35,27 @@ function checkMood() {
 	stats.forEach(stat => {
 		if (stat.value < 30) {
 			animal.removeEventListener('mousedown', clicked);
-			if (needs.includes(stat.dataset.need)) return;
-			needs.push(stat.dataset.need);
+			if (needs.includes(stat)) return;
+			needs.push(stat);
 			console.log(needs);
-				
 
+			needs.forEach(need => {
+				console.log(need.dataset.need, need.value);
+				if (need.dataset.need === 'eat'){
+					animal.src = "img/sad.png";
+				}
+				if (need.dataset.need === 'cure'){
+					animal.src = "img/sick.png";
+				}
+				if (need.dataset.need === 'pet'){
+					animal.src = "img/cry.png";
+				}
+			})
+		}
 
-			// if (needs.includes("cure")) 
-			// 	{animal.src = "img/sick.png"}; 
-			// if (needs.includes("eat")) 
-			// 	{animal.src = "img/sad.png"};
-			// if (needs.includes("pet")) 
-			// 	{animal.src = "img/cry.png"};
-		// } else if (stat.value > 31) {
-		// 	animal.src = "img/hello.png";
+		if (stat.value > 30) {
+			if (needs.includes(stat)) needs.splice(needs.indexOf(stat), 1);
+			console.log(needs);
 		}
 	})
 }
@@ -64,7 +72,7 @@ function decreaseStats () {
 				return;
 			}
 		});
-	}, 300);
+	}, 600);
 }
 
 
