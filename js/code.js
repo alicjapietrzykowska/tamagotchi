@@ -28,28 +28,14 @@ function takeCare (e) {
 
 const waitingIcons = ['cool', 'music', 'selfie'];
 
-const needs = [];
+const needs = {};
 
 function checkMood() {
 	stats.forEach(stat => {
-		if (stat.value < 30) {
-			animal.removeEventListener('mousedown', clicked);
-			if (needs.includes(stat.dataset.need)) return;
-			needs.push(stat.dataset.need);
-			console.log(needs);
-				
-
-
-			// if (needs.includes("cure")) 
-			// 	{animal.src = "img/sick.png"}; 
-			// if (needs.includes("eat")) 
-			// 	{animal.src = "img/sad.png"};
-			// if (needs.includes("pet")) 
-			// 	{animal.src = "img/cry.png"};
-		// } else if (stat.value > 31) {
-		// 	animal.src = "img/hello.png";
-		}
-	})
+		Object.defineProperty(needs, 'need', withValue(stat.dataset.need));
+		needs[value] = stat.value;
+		console.table(needs);
+		})
 }
 
 function decreaseStats () {
