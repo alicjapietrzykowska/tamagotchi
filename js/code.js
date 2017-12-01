@@ -5,6 +5,7 @@ const reviveBtn = document.querySelector('#revive');
 const animal = document.querySelector('.animal img');
 
 let pressTimer;
+let changeIcon;
 
 function takeCare (e) {
 	pressTimer = setInterval(function() {
@@ -17,6 +18,7 @@ function takeCare (e) {
 				animal.src = "img/eat.png";
 			}
 			if (target.dataset.need === 'cure'){
+				console.log('what');
 				animal.src = "img/shower.png";
 			}
 			if (target.dataset.need === 'pet'){
@@ -27,15 +29,24 @@ function takeCare (e) {
 	checkMood();
 }
 
-// const waitingIcons = ['cool', 'music', 'selfie'];
+const waitingIcons = ['hello', 'cool', 'music', 'selfie'];
 
 const needs = [];
+
+let ded = false;
 
 function defaultState () {
 		stats.forEach(stat => {
 			if (needs.includes(stat)) needs.splice(needs.indexOf(stat), 1);
-			animal.src = "img/hello.png";
-		});
+		});	
+		if (ded) return;
+		let miliseconds = Math.floor((Math.random() * (6 - 5) + 5) * 1000);
+		changeIcon = setInterval(function(){
+			let i = Math.floor(Math.random() * (waitingIcons.length - 0));
+			let icon = waitingIcons[i];
+			animal.src = `img/${icon}.png`;
+		}, miliseconds);
+		animal.src = "img/hello.png";
 }
 
 function checkMood() {
@@ -59,22 +70,22 @@ function checkMood() {
 			})
 		}
 
-		if (stat.value > 30) {
-			defaultState();
-		}
-
-
+		// if (stat.value > 30) {
+		// 	decreaseStats();
+		// }
 	})
 }
 
 function decreaseStats () {
-	defaultState();
 	reviveBtn.style.display = "none";
+	// defaultState();
 	let called = setInterval (() => {
 		stats.forEach(stat => {
 			stat.value--;
 			checkMood();	
+			console.log(stat.value);
 			if (stat.value == 0) {
+				console.log('death...');
 				death();
 				clearInterval(called);
 				return;
@@ -84,17 +95,24 @@ function decreaseStats () {
 }
 
 
-function death () {
+function death() {
+	document.removeEventListener('mouseup', stop);
+	animal.removeEventListener('mousedown', clicked);
+	clearInterval(changeIcon);
 	buttons.forEach(button => {
 		button.disable = true;
+		button.removeEventListener('mousedown', takeCare)
 	})
 	console.log('DEATH!');
+	animal.src = "img/cry.png";
 	reviveBtn.style.display = "block";
 	reviveBtn.addEventListener('click', revive);
+	ded = true;
 }
 
 function revive () {
 	stats.forEach(stat => stat.value = 50);
+	ded = false;
 	decreaseStats();
 }
 
@@ -102,11 +120,13 @@ function clicked (e) {
 	animal.src = "img/happy.png";
 };
 
+function stop(){
+	clearTimeout(pressTimer);
+	decreaseStats();
+};
 
 buttons.forEach(button => button.addEventListener('mousedown', takeCare));
-document.addEventListener('mouseup', () => 
-	{clearTimeout(pressTimer);
-	 checkMood();
-	});
+document.addEventListener('mouseup', stop);
 window.addEventListener('load', decreaseStats);
+window.addEventListener('load', defaultState);
 animal.addEventListener('mousedown', clicked);
