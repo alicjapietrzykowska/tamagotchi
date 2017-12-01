@@ -27,9 +27,16 @@ function takeCare (e) {
 	checkMood();
 }
 
-const waitingIcons = ['cool', 'music', 'selfie'];
+// const waitingIcons = ['cool', 'music', 'selfie'];
 
 const needs = [];
+
+function defaultState () {
+		stats.forEach(stat => {
+			if (needs.includes(stat)) needs.splice(needs.indexOf(stat), 1);
+			animal.src = "img/hello.png";
+		});
+}
 
 function checkMood() {
 	stats.forEach(stat => {
@@ -37,7 +44,6 @@ function checkMood() {
 			animal.removeEventListener('mousedown', clicked);
 			if (needs.includes(stat)) return;
 			needs.push(stat);
-			console.log(needs);
 
 			needs.forEach(need => {
 				console.log(need.dataset.need, need.value);
@@ -54,13 +60,15 @@ function checkMood() {
 		}
 
 		if (stat.value > 30) {
-			if (needs.includes(stat)) needs.splice(needs.indexOf(stat), 1);
-			console.log(needs);
+			defaultState();
 		}
+
+
 	})
 }
 
 function decreaseStats () {
+	defaultState();
 	reviveBtn.style.display = "none";
 	let called = setInterval (() => {
 		stats.forEach(stat => {
@@ -72,7 +80,7 @@ function decreaseStats () {
 				return;
 			}
 		});
-	}, 600);
+	}, 1000);
 }
 
 
@@ -91,11 +99,14 @@ function revive () {
 }
 
 function clicked (e) {
-	animal.src = "img/happy.png"
+	animal.src = "img/happy.png";
 };
 
 
 buttons.forEach(button => button.addEventListener('mousedown', takeCare));
-document.addEventListener('mouseup', () => clearTimeout(pressTimer));
+document.addEventListener('mouseup', () => 
+	{clearTimeout(pressTimer);
+	 checkMood();
+	});
 window.addEventListener('load', decreaseStats);
 animal.addEventListener('mousedown', clicked);
