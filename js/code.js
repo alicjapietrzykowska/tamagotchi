@@ -7,6 +7,12 @@ const animal = document.querySelector('.animal img');
 let pressTimer;
 let changeIcon;
 
+const statistics = {
+	hunger: parseFloat(document.querySelector('#hunger').value),
+	health: parseFloat(document.querySelector('#health').value),
+	happiness: parseFloat(document.querySelector('#happiness').value)
+};
+
 function takeCare (e) {
 	pressTimer = setInterval(function() {
 		stats.forEach(stat => {
