@@ -3,7 +3,8 @@
   margin: 0; }
 
 body {
-  color: #212121; }
+  color: #212121;
+  font-family: sans-serif; }
 
 .egg {
   position: relative;
