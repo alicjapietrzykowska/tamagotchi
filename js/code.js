@@ -60,15 +60,15 @@ function takeCare (e) {
 					}
 				}
 			});
-	}, 100);
+	}, 10000);
 }
 
 //reset state when user released button
 function stop(){
 	press = false;
 	clearInterval(pressTimer);
-	clearInterval(changeIcon);
-	defaultMood();
+	if (sad) checkMood();
+	else defaultMood();
 };
 
 //reset icon when user isn't doing anything
@@ -88,13 +88,14 @@ function defaultMood () {
 }
 //check if animal isn't neglected
 function checkMood() {
+	sad = false;
 	if (press) return;
 	//find smallest value of statistics
-	let arr = Object.values(statistics);
-	let min = Math.min(...arr);
+	const arr = Object.values(statistics);
+	const min = Math.min(...arr);
 	Object.entries(statistics).forEach(stat => {
 		const name = stat[0];
-		let value = stat[1];
+		const value = stat[1];
 		if (value == 0) {
 			death();
 			return;
@@ -115,8 +116,6 @@ function checkMood() {
 				animal.src = "img/cry.png";
 				if (Notification.permission === "granted"  && !(notify)) showNotification(name);
 			}
-		} else {
-			sad = false;
 		}
 	});
 }
@@ -133,7 +132,7 @@ function decreaseStats () {
 			document.getElementById(`${name}`).value = value;
 			checkMood();
 		});
-	}, 10000);
+	}, 1000);
 }
 
 //turn of the game
