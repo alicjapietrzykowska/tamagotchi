@@ -60,7 +60,7 @@ function takeCare (e) {
 					}
 				}
 			});
-	}, 10000);
+	}, 100);
 }
 
 //reset state when user released button
@@ -132,7 +132,7 @@ function decreaseStats () {
 			document.getElementById(`${name}`).value = value;
 			checkMood();
 		});
-	}, 1000);
+	}, 10000);
 }
 
 //turn of the game
