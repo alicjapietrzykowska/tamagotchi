@@ -11,7 +11,10 @@ body {
 }
 
 .egg {
-	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 	margin: 0 auto;
 	// display: flex;
 	width: 500px;
@@ -25,16 +28,17 @@ body {
 	box-shadow: inset -12px -12px 0px -1px rgba(0,0,0,0.4);
 
 	@media #{$low1024}{
-		width: 250px;
-		height: 300px;
+		width: 400px;
+		height: 500px;
+	}
+	@media #{$low400}{
+		width: 300px;
+		height: 400px;
 	}
 }
 
 .screen {
-	margin: 0 auto;
-	position: absolute;
-	top: 150px;
-	left: 15%;
+	margin-top: 40px;
 	width: 70%;
 	height: 35%;
 	background-color: rgba(255,255,255, 0.7);
@@ -45,20 +49,29 @@ body {
 
 	.stats {
 		display: flex;
+
 		div {
 			margin: 10px;
 			display: inline-flex;
+				@media #{$low400}{
+					margin: 5px;
+				}
 
 			label {
 				margin-right: 7px;
-			}
+				@media #{$low400}{
+					margin-right: 3px;
+				}
 
+			}
 		}
 	}
 }
+
 .animal{
 	border-radius: 5px;
 	width: 95%;
+	height: auto;
 	margin: 0 auto;
 	background-color: rgba(255,255,255, 0.7);
 	-webkit-box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
@@ -68,11 +81,18 @@ body {
 	img{
 		max-width: 130px;
 		padding: 10px;
+
+		@media #{$low1024}{
+			max-width: 95px;
+		}
+		@media #{$low400}{
+			max-width: 80px;
+		}
 	}
 }
 
 .buttons {
-	height: 80%;
+	// height: 80%;
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
@@ -89,6 +109,11 @@ body {
 			-webkit-box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
 			-moz-box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
 			box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
+			@media #{$low400}{
+				width: 50px;
+				height: 50px;
+				margin: 10px 0;
+			}
 
 			&:hover {
 				background-color: $buttons-color-hover;
@@ -118,7 +143,7 @@ body {
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
-  margin: 1.8px 0;
+  margin: 4px 0;
 }
 input[type=range]:focus {
   outline: none;
@@ -133,15 +158,18 @@ input[type=range]::-webkit-slider-runnable-track {
   border: 0px solid $text-color;
 }
 input[type=range]::-webkit-slider-thumb {
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-  border: 1px solid #212121;
-  height: 13px;
-  width: 13px;
-  border-radius: 3px;
-  background: $thumb-color;
-  cursor: default;
-  -webkit-appearance: none;
-  margin-top: -1.8px;
+	box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+	border: 1px solid #212121;
+	height: 13px;
+	width: 13px;
+	border-radius: 3px;
+	background: $thumb-color;
+	cursor: default;
+	-webkit-appearance: none;
+	margin-top: -1.8px;
+  	@media #{$low400}{
+		width: 5px;
+	}
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: $range-color;
@@ -161,6 +189,9 @@ input[type=range]::-moz-range-thumb {
   border-radius: 3px;
   background: $thumb-color;
   cursor: default;
+  	@media #{$low400}{
+		width: 5px;
+	}
 }
 input[type=range]::-ms-track {
   width: 100%;
@@ -188,6 +219,9 @@ input[type=range]::-ms-thumb {
   background: $thumb-color;
   cursor: default;
   height: 9.4px;
+  	@media #{$low400}{
+		width: 5px;
+	}
 }
 input[type=range]:focus::-ms-fill-lower {
   background: $range-color;
