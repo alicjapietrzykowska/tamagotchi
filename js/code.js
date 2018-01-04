@@ -20,12 +20,12 @@ let notify = false;
 //icons in default state
 const waitingIcons = ['hello', 'cool', 'music', 'selfie'];
 
-//
-const statistics = {
-	eat: parseFloat(document.querySelector('#eat').value),
-	cure: parseFloat(document.querySelector('#cure').value),
-	pet: parseFloat(document.querySelector('#pet').value)
-};
+const statistics = {};
+
+function setStat( name, value ) {
+	statistics[ name ] = value;
+	document.querySelector( `#${ name }` ).value = value;
+}
 
 //change icon when animal clicked
 function clicked () {
@@ -119,9 +119,9 @@ function checkMood() {
 	//find smallest value of statistics
 	const arr = Object.values(statistics);
 	const min = Math.min(...arr);
-	Object.entries(statistics).forEach(stat => {
-		const name = stat[0];
-		const value = stat[1];
+	stats.forEach(stat => {
+		let name = stat.id;
+		let value = stat.value;
 		if (value == 0) {
 			death();
 			return;
@@ -164,35 +164,31 @@ function takeCare (e) {
 	notify = false;
 	//repeat function as long as user hold the button
 	pressTimer = setInterval(function() {
-			Object.entries(statistics).forEach(stat => {
-				//check which button was clicked
-				target = e.target;
-				//separete object entries
-				const name = stat[0];
-				let value = stat[1];
-				//find stat of pushed button
-				if (name === target.dataset.need){
-					//increase value
-					value++;
-					statistics[name] = value;
-					//show current value in DOM
-					document.getElementById(`${name}`).value = value;
-					//change icon depending on the stat
-					switch(name){
-						case 'eat':
-							animal.src = "img/eat.png";
-							break;
-						case 'cure':
-							animal.src = "img/shower.png";
-							break;
-						case 'pet':
-							animal.src = "img/laughing.png";
-							break;
-						default:
-							defaultMood();
-					}
+		stats.forEach(stat => {
+			let name = stat.id;
+			let value = stat.value;
+			target = e.target;
+			//find stat of pushed button
+			if (name === target.dataset.need){
+				//increase value
+				value++;
+				setStat( name, value );
+				//change icon depending on the stat
+				switch(name){
+					case 'eat':
+						animal.src = "img/eat.png";
+						break;
+					case 'cure':
+						animal.src = "img/shower.png";
+						break;
+					case 'pet':
+						animal.src = "img/laughing.png";
+						break;
+					default:
+						defaultMood();
 				}
-			});
+			}
+		});
 	}, 100);
 }
 
@@ -217,15 +213,14 @@ function decreaseStats () {
 	if (press) return;
 	reviveBtn.style.display = "none";
 	called = setInterval (() => {
-		Object.entries(statistics).forEach(stat => {
-			const name = stat[0];
-			let value = stat[1];
+		stats.forEach(stat => {
+			let name = stat.id;
+			let value = stat.value;
 			value--;
-			statistics[name] = value;
-			document.getElementById(`${name}`).value = value;
+			setStat( name, value );
 			checkMood();
 		});
-	}, 10000);
+	}, 1000);
 }
 
 window.addEventListener('load', decreaseStats);
