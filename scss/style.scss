@@ -109,6 +109,7 @@ body {
 			-webkit-box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
 			-moz-box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
 			box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
+			font-size: 25px;
 			@media #{$low400}{
 				width: 50px;
 				height: 50px;
@@ -117,9 +118,6 @@ body {
 
 			&:hover {
 				background-color: $buttons-color-hover;
-			}
-			span {
-				font-size: 25px;
 			}
 		}
 	}

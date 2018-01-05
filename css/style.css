@@ -87,7 +87,8 @@ body {
       border: 0;
       -webkit-box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
       -moz-box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
-      box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75); }
+      box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
+      font-size: 25px; }
       @media only screen and (max-width: 400px) {
         .buttons div button {
           width: 50px;
@@ -95,8 +96,6 @@ body {
           margin: 10px 0; } }
       .buttons div button:hover {
         background-color: #FBC02D; }
-      .buttons div button span {
-        font-size: 25px; }
 
 #revive {
   display: none;

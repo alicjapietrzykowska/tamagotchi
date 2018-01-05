@@ -1,7 +1,8 @@
-// (function (){
+(function (){
 
 const stats = document.querySelectorAll('.stats input');
 const buttons = document.querySelectorAll('.buttons button');
+const buttonsList = document.querySelector('.buttons');
 const reviveBtn = document.querySelector('#revive');
 
 const animal = document.querySelector('.animal img');
@@ -15,11 +16,15 @@ let called;
 let press = false;
 let ded = false;
 let sad = false;
-let notify = false;
+
+let eatNotify = false;
+let cureNotify = false;
+let petNotify = false;
 
 //icons in default state
 const waitingIcons = ['hello', 'cool', 'music', 'selfie'];
 
+let notifications = [];
 const statistics = {};
 
 function setStat( name, value ) {
@@ -34,7 +39,6 @@ function clicked () {
 
 //run Notification
 function showNotification(need){
-	let notification;
 	let options;
     switch (need){
     	case 'eat':
@@ -42,28 +46,27 @@ function showNotification(need){
 			    body: 'Let me eat!',
 			    icon: 'img/hungry.png',
 			}
-    		notification = new Notification('Tamagotchi says', options);
-    		notify = true;
+    		eatNotify = new Notification('Tamagotchi says', options);
+    		notifications.push(eatNotify);
     		break;
     	case 'cure':
     	    options = {
 			    body: 'I have fever!',
 			    icon: 'img/sick.png',
 			}
-    		notification = new Notification('Tamagotchi says', options);
-    		notify = true;
+    		cureNotify = new Notification('Tamagotchi says', options);
+    		notifications.push(cureNotify);
     		break;
     	case 'pet':
       	    options = {
 			    body: 'Play with me!',
 			    icon: 'img/cry.png',
 			}
-    		notification = new Notification('Tamagotchi says', options);
-    		notify = true;
+    		petNotify = new Notification('Tamagotchi says', options);
+    		notifications.push(petNotify);
     		break;
     	default:
-    		notification = new Notification('Take care of me!');
-    		notify = true;
+    		return;
     }
 }
 
@@ -74,12 +77,10 @@ function revive () {
 	//turn on event listeners after death
 	document.addEventListener('mouseup', stop);
 	animal.addEventListener('mousedown', clicked);
-	buttons.forEach(button => {
-		button.disable = false;
-		button.addEventListener('mousedown', takeCare)
-	});	
+	buttons.forEach(button => button.disable = false);	
+	buttonsList.addEventListener('mousedown', takeCare);
 	//increase stats to default state
-	for(var key in statistics) {
+	for (var key in statistics) {
 		statistics[key] = 50; 
 		document.getElementById(`${key}`).value = statistics[key];
 	};
@@ -91,20 +92,21 @@ function revive () {
 //turn off the game
 function death() {
 	ded = true;
-	notify = false;
+	let eatNotify = false;
+	let cureNotify = false;
+	let petNotify = false;
+	notifications.forEach(notify => notify.close());
 	//turn off event listeners
 	document.removeEventListener('mouseup', stop);
 	animal.removeEventListener('mousedown', clicked);
+	buttonsList.removeEventListener('mousedown', takeCare);
 	clearInterval(called);
 	called = 0;
 	clearInterval(changeIcon);
 	changeIcon = 0;
 	clearInterval(pressTimer);
 	pressTimer = 0;
-	buttons.forEach(button => {
-		button.disable = true;
-		button.removeEventListener('mousedown', takeCare);
-	});
+	buttons.forEach(button => button.disable = true);
 	//change icon
 	animal.src = "img/dead.png";
 	//show revive button
@@ -119,9 +121,7 @@ function checkMood() {
 	//find smallest value of statistics
 	const arr = Object.values(statistics);
 	const min = Math.min(...arr);
-	stats.forEach(stat => {
-		let name = stat.id;
-		let value = stat.value;
+	Object.entries( statistics ).forEach( ( [ name, value ] ) => {
 		if (value == 0) {
 			death();
 			return;
@@ -133,15 +133,15 @@ function checkMood() {
 			animal.removeEventListener('mousedown', clicked);
 			if (value == min && name === 'eat'){
 				animal.src = "img/hungry.png";
-				if (Notification.permission === "granted" && !(notify)) showNotification(name);
+				if (Notification.permission === "granted" && (eatNotify === false)) showNotification(name);
 			}
 			if (value == min && name === 'cure'){
 				animal.src = "img/sick.png";
-				if (Notification.permission === "granted" && !(notify)) showNotification(name);
+				if (Notification.permission === "granted" && (cureNotify === false)) showNotification(name);
 			}
 			if (value == min && name === 'pet'){
 				animal.src = "img/cry.png";
-				if (Notification.permission === "granted"  && !(notify)) showNotification(name);
+				if (Notification.permission === "granted"  && (petNotify === false)) showNotification(name);
 			}
 		}
 	});
@@ -150,6 +150,7 @@ function checkMood() {
 //reset state when user released button
 function stop(){
 	press = false;
+	notifications.forEach(notify => notify.close());
 	clearInterval(pressTimer);
 	pressTimer = 0;
 	if (sad) checkMood();
@@ -161,12 +162,9 @@ function takeCare (e) {
 	clearInterval(changeIcon);
 	changeIcon = 0;
 	press = true;
-	notify = false;
 	//repeat function as long as user hold the button
 	pressTimer = setInterval(function() {
-		stats.forEach(stat => {
-			let name = stat.id;
-			let value = stat.value;
+		Object.entries( statistics ).forEach( ( [ name, value ] ) => {
 			target = e.target;
 			//find stat of pushed button
 			if (name === target.dataset.need){
@@ -177,12 +175,15 @@ function takeCare (e) {
 				switch(name){
 					case 'eat':
 						animal.src = "img/eat.png";
+						eatNotify = false;
 						break;
 					case 'cure':
 						animal.src = "img/shower.png";
+						cureNotify = false;
 						break;
 					case 'pet':
 						animal.src = "img/laughing.png";
+						petNotify = false;
 						break;
 					default:
 						defaultMood();
@@ -213,9 +214,7 @@ function decreaseStats () {
 	if (press) return;
 	reviveBtn.style.display = "none";
 	called = setInterval (() => {
-		stats.forEach(stat => {
-			let name = stat.id;
-			let value = stat.value;
+		Object.entries( statistics ).forEach( ( [ name, value ] ) => {
 			value--;
 			setStat( name, value );
 			checkMood();
@@ -223,10 +222,16 @@ function decreaseStats () {
 	}, 1000);
 }
 
+stats.forEach(stat => {
+	let name = stat.id;
+	let value = stat.value;
+	setStat( name, value );
+});
+
 window.addEventListener('load', decreaseStats);
 window.addEventListener('load', defaultMood);
 window.addEventListener('load', () => Notification.requestPermission());
-buttons.forEach(button => button.addEventListener('mousedown', takeCare));
+buttonsList.addEventListener('mousedown', takeCare);
 document.addEventListener('mouseup', stop);
 
-// }());
+}());
