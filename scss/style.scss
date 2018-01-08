@@ -116,7 +116,7 @@ body {
 				margin: 10px 0;
 			}
 
-			&:hover {
+			&:hover, &:focus {
 				background-color: $buttons-color-hover;
 			}
 		}

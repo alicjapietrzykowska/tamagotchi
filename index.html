@@ -11,15 +11,15 @@
 	<div class="egg">	
 		<div class="screen">
 			<div class="stats">
-				<div>
+				<div title="Hunger statistic">
 					<label for="eat"><span class="ion-pizza"></span></label>
 					<input type="range" disabled value="50" min="0" max="100" id="eat" data-need="eat">
 				</div>
-				<div>
+				<div title="Health statistic">
 					<label for="cure"><span class="ion-medkit"></span></label>
 					<input type="range" disabled data-need="cure" value="50" min="0" max="100" id="cure">
 				</div>
-				<div>
+				<div title="Happiness statistic">
 					<label for="pet"><span class="ion-happy"></span></label>
 					<input type="range" disabled value="50" data-need="pet" min="0" max="100" id="pet">
 				</div>
@@ -29,15 +29,15 @@
 
 		<div class="buttons">
 			<div>
-				<button id="eatBtn" data-need="eat" class="ion-pizza"></button></br>
+				<button id="eatBtn" data-need="eat" aria-label="Feed tamagotchi" title="Feed tamagotchi" class="ion-pizza"></button></br>
 				<label for="eatBtn">Eat</label>
 			</div>
 			<div>
-				<button id="cureBtn" data-need="cure" class="ion-medkit"></button></br>
+				<button id="cureBtn" data-need="cure" aria-label="Cure tamagotchi" title="Cure tamagotchi" class="ion-medkit"></button></br>
 				<label for="cureBtn">Cure</label>
 			</div>
 			<div>
-				<button id="petBtn" data-need="pet" class="ion-happy"></button></br>
+				<button id="petBtn" data-need="pet" aria-label="Pet tamagotchi" title="Pet tamagotchi" class="ion-happy"></button></br>
 				<label for="petBtn">Pet</label>
 			</div>
 		</div>

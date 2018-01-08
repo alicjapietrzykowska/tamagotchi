@@ -94,7 +94,7 @@ body {
           width: 50px;
           height: 50px;
           margin: 10px 0; } }
-      .buttons div button:hover {
+      .buttons div button:hover, .buttons div button:focus {
         background-color: #FBC02D; }
 
 #revive {
