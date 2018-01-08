@@ -28,6 +28,7 @@ let notifications = [];
 const statistics = {};
 
 function setStat( name, value ) {
+	if (value > 100) return;
 	statistics[ name ] = value;
 	document.querySelector( `#${ name }` ).value = value;
 }
@@ -198,7 +199,7 @@ function defaultMood () {
 	if (press || ded || sad) return;
 	animal.addEventListener('mousedown', clicked);
 	//draw random miliseconds to show random icons
-	let miliseconds = Math.floor((Math.random() * (6 - 5) + 5) * 1000);
+	let miliseconds = Math.floor((Math.random() * (30 - 5) + 5) * 1000);
 	changeIcon = setInterval(function(){
 		let i = Math.floor(Math.random() * (waitingIcons.length - 0));
 		let icon = waitingIcons[i];
