@@ -7,19 +7,27 @@ body {
   font-family: sans-serif; }
 
 .egg {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   margin: 0 auto;
+  /* display: flex;*/
   width: 500px;
   height: 600px;
   background-color: #16a085;
-  -webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px;
   border-radius: 50%  50%  50%  50%  / 60%   60%   40%  40%;
   text-align: center;
   -webkit-box-shadow: inset -12px -12px 0px -1px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: inset -12px -12px 0px -1px rgba(0, 0, 0, 0.4);
   box-shadow: inset -12px -12px 0px -1px rgba(0, 0, 0, 0.4); }
   @media only screen and (max-width: 1024px) {
     .egg {
@@ -37,12 +45,15 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
   -webkit-box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6);
   box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6); }
   .screen .stats {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex; }
     .screen .stats div {
       margin: 10px;
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
       display: inline-flex; }
       @media only screen and (max-width: 400px) {
         .screen .stats div {
@@ -60,7 +71,6 @@ body {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.7);
   -webkit-box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6);
   box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6); }
   .animal img {
     max-width: 130px;
@@ -73,8 +83,15 @@ body {
         max-width: 80px; } }
 
 .buttons {
+  /* height: 80%;*/
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
   align-items: flex-end; }
   .buttons div {
     margin: 10px; }
@@ -86,9 +103,9 @@ body {
       border-radius: 50%;
       border: 0;
       -webkit-box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
       box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
-      font-size: 25px; }
+      font-size: 25px;
+      cursor: pointer; }
       @media only screen and (max-width: 400px) {
         .buttons div button {
           width: 50px;
@@ -104,10 +121,12 @@ body {
   background-color: #FF9800;
   border-radius: 5px;
   font-size: 20px;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
   #revive:hover {
     background-color: #F57C00; }
 
+/*reset browser style on inputs and add custom*/
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
@@ -120,12 +139,14 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 9.4px;
   cursor: default;
+  -webkit-box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   background: #ffc107;
   border-radius: 1.3px;
   border: 0px solid #212121; }
 
 input[type=range]::-webkit-slider-thumb {
+  -webkit-box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   border: 1px solid #212121;
   height: 13px;

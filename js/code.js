@@ -1,6 +1,5 @@
 (function (){
 
-const stats = document.querySelectorAll('.stats input');
 const buttons = document.querySelectorAll('.buttons button');
 const buttonsList = document.querySelector('.buttons');
 const reviveBtn = document.querySelector('#revive');
@@ -27,16 +26,14 @@ const waitingIcons = ['hello', 'cool', 'music', 'selfie'];
 let notifications = [];
 const statistics = {};
 
+//Initiate Touch Emulator which allows touch events on mobile
+TouchEmulator();
+
+//update statistics value
 function setStat( name, value ) {
-	if (value > 100) return;
 	statistics[ name ] = value;
 	document.querySelector( `#${ name }` ).value = value;
 }
-
-//change icon when animal clicked
-function clicked () {
-	animal.src = "img/happy.png";
-};
 
 //run Notification
 function showNotification(need){
@@ -76,17 +73,16 @@ function revive () {
 	ded = false;
 	sad = false;
 	//turn on event listeners after death
-	document.addEventListener('mouseup', stopCare);
-	animal.addEventListener('mousedown', clicked);
-	buttons.forEach(button => button.disable = false);	
-	buttonsList.addEventListener('mousedown', takeCare);
+	document.addEventListener('touchend', stopCare);
+	buttonsList.addEventListener('touchstart', takeCare);
 	//increase stats to default state
 	for (var key in statistics) {
 		statistics[key] = 50; 
 		document.getElementById(`${key}`).value = statistics[key];
 	};
-	//run default function
+	//run default functions
 	decreaseStats();
+	defaultMood();
 }
 
 //turn off the game
@@ -97,16 +93,14 @@ function death() {
 	let petNotify = false;
 	notifications.forEach(notify => notify.close());
 	//turn off event listeners
-	document.removeEventListener('mouseup', stopCare);
-	animal.removeEventListener('mousedown', clicked);
-	buttonsList.removeEventListener('mousedown', takeCare);
+	document.removeEventListener('touchend', stopCare);
+	buttonsList.removeEventListener('touchstart', takeCare);
 	clearInterval(called);
 	called = 0;
 	clearInterval(changeIcon);
 	changeIcon = 0;
 	clearInterval(pressTimer);
 	pressTimer = 0;
-	buttons.forEach(button => button.disable = true);
 	//change icon
 	animal.src = "img/dead.png";
 	//show revive button
@@ -130,7 +124,6 @@ function checkMood() {
 			sad = true;	
 			clearInterval(changeIcon);
 			changeIcon = 0;
-			animal.removeEventListener('mousedown', clicked);
 			if (value == min && name === 'eat'){
 				animal.src = "img/hungry.png";
 				if (Notification.permission === "granted" && (eatNotify === false)) showNotification(name);
@@ -152,25 +145,32 @@ function stopCare(){
 	press = false;
 	document.activeElement.blur();
 	notifications.forEach(notify => notify.close());
+	clearInterval(changeIcon);
+	changeIcon = 0;
 	clearInterval(pressTimer);
 	pressTimer = 0;
 	checkMood();
-	defaultMood();
+	if (!sad) defaultMood();
 }
 
 //increase range value when user push button 
 function takeCare (e) {
+	//prevent from clicking more than one button at once
+	if (press) return;
+	//turn off default icons
 	clearInterval(changeIcon);
 	changeIcon = 0;
 	press = true;
 	//repeat function as long as user hold the button
 	pressTimer = setInterval(function() {
 		Object.entries( statistics ).forEach( ( [ name, value ] ) => {
-			target = e.target;
+			let target = e.target;
+			let maxValue = parseFloat(document.querySelector( `#${ name }` ).max);
 			//find stat of pushed button
 			if (name === target.dataset.need){
 				//increase value
 				value++;
+				if (value > maxValue) return;
 				setStat( name, value );
 				//change icon depending on the stat
 				switch(name){
@@ -191,13 +191,12 @@ function takeCare (e) {
 				}
 			}
 		});
-	}, 100);
+	}, 80);
 }
 
 //reset icon when user isn't doing anything
 function defaultMood () {
 	if (press || ded || sad) return;
-	animal.addEventListener('mousedown', clicked);
 	//draw random miliseconds to show random icons
 	let miliseconds = Math.floor((Math.random() * (30 - 5) + 5) * 1000);
 	changeIcon = setInterval(function(){
@@ -209,31 +208,34 @@ function defaultMood () {
 }
 
 //decrease statistics in time
-function decreaseStats () {
-	if (press) return;
-	defaultMood();
+function decreaseStats() {
 	reviveBtn.style.display = "none";
 	called = setInterval (() => {
 		Object.entries( statistics ).forEach( ( [ name, value ] ) => {
 			value--;
 			setStat( name, value );
-			checkMood();
-		});
+		})
+		checkMood();
 	}, 1000);
 }
 
-stats.forEach(stat => {
-	let name = stat.id;
-	let value = stat.value;
-	setStat( name, value );
-});
-
-window.addEventListener('load', ()=> {
+window.addEventListener('load', () => {	
+	//set initial statistics
+	const stats = document.querySelectorAll('.stats input');	
+	stats.forEach(stat => {
+		let name = stat.id;
+		let value = stat.value;
+		setStat( name, value );
+	});
+	//run initial functions
 	decreaseStats();
+	defaultMood();
 	Notification.requestPermission();
+
 })
 
-buttonsList.addEventListener('mousedown', takeCare);
-document.addEventListener('mouseup', stopCare);
+// buttons.forEach(button => button.addEventListener());
+buttonsList.addEventListener('touchstart', takeCare, false);
+document.addEventListener('touchend', stopCare, false);
 
 }());

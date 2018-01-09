@@ -11,20 +11,27 @@ body {
 }
 
 .egg {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 	margin: 0 auto;
-	// display: flex;
+	/* display: flex;*/
 	width: 500px;
 	height: 600px;
 	background-color: #16a085;
-	-webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px;
 	border-radius:         50%  50%  50%  50%  / 60%   60%   40%  40%;
 	text-align: center;
 	-webkit-box-shadow: inset -12px -12px 0px -1px rgba(0,0,0,0.4);
-	-moz-box-shadow: inset -12px -12px 0px -1px rgba(0,0,0,0.4);
 	box-shadow: inset -12px -12px 0px -1px rgba(0,0,0,0.4);
 
 	@media #{$low1024}{
@@ -44,14 +51,17 @@ body {
 	background-color: rgba(255,255,255, 0.7);
 	border-radius: 5px;
 	-webkit-box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
-	-moz-box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
 	box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
 
 	.stats {
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
 
 		div {
 			margin: 10px;
+			display: -webkit-inline-box;
+			display: -ms-inline-flexbox;
 			display: inline-flex;
 				@media #{$low400}{
 					margin: 5px;
@@ -75,7 +85,6 @@ body {
 	margin: 0 auto;
 	background-color: rgba(255,255,255, 0.7);
 	-webkit-box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
-	-moz-box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
 	box-shadow: inset -5px -5px 0px -1px rgba(0,0,0,0.6);
 
 	img{
@@ -92,10 +101,16 @@ body {
 }
 
 .buttons {
-	// height: 80%;
+	/* height: 80%;*/
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
-	align-items: flex-end;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: end;
+	    -ms-flex-align: end;
+	        align-items: flex-end;
 
 	div {
 		margin: 10px;
@@ -107,9 +122,9 @@ body {
 			border-radius: 50%;
 			border: 0;
 			-webkit-box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
-			-moz-box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
 			box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
 			font-size: 25px;
+			cursor: pointer;
 			@media #{$low400}{
 				width: 50px;
 				height: 50px;
@@ -130,13 +145,14 @@ body {
 	background-color: $reviveBtn-color;	
 	border-radius: 5px;
 	font-size: 20px;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	&:hover{
 		background-color: $reviveBtn-color-hover;
 	}
 }
 
-//reset browser style on inputs and add custom
+/*reset browser style on inputs and add custom*/
 
 input[type=range] {
   -webkit-appearance: none;
@@ -150,13 +166,15 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 9.4px;
   cursor: default;
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  -webkit-box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+          box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   background: $range-color;
   border-radius: 1.3px;
   border: 0px solid $text-color;
 }
 input[type=range]::-webkit-slider-thumb {
-	box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+	-webkit-box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+	        box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
 	border: 1px solid #212121;
 	height: 13px;
 	width: 13px;
