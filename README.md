@@ -1,4 +1,5 @@
 # Tamagotchi
+**[LIVE PREVIEW](https://alicjalukaszewska.github.io/tamagotchi/)** 
 
 Application simulates popular 90’s toy. Feed, cure and play with your animal to prevent it from death. 
 Application works pretty well on mobile devices.
@@ -20,7 +21,7 @@ If any statistics value drops to 30, animal gets sad and changes its icon to sho
 If any statistics value drops to 0, animal dies and all interval functions stop. User also can’t use any button to increase value anymore. 
 User can reset game by clicking a “Revive” button. 
 
-
+---
 ### Potential future features:
 * Mobile application
 * Option to change animal’s look
