@@ -3,7 +3,7 @@
   const DEFAULT_STATISTIC_VALUE = 50;
   const ALERT_STATISTIC_VALUE = 30;
   const DEATH_STATISTIC_VALUE = 0;
-  const DECREASE_STATS_INTERVAL = 500;
+  const DECREASE_STATS_INTERVAL = 2000;
 
   // HTML elements
   const buttonsList = document.querySelector(".buttons");
@@ -40,9 +40,10 @@
   function showNotification(need) {
     // show notification only for users who allowed it
     if (Notification.permission !== "granted") return;
+    let options = {};
     switch (need) {
       case "eat":
-        const options = {
+        options = {
           body: "Let me eat!",
           icon: "img/hungry.png",
         };
@@ -50,7 +51,7 @@
         notifications.push(eatNotify);
         break;
       case "cure":
-        const options = {
+        options = {
           body: "I have fever!",
           icon: "img/sick.png",
         };
@@ -58,7 +59,7 @@
         notifications.push(cureNotify);
         break;
       case "pet":
-        const options = {
+        options = {
           body: "Play with me!",
           icon: "img/cry.png",
         };
