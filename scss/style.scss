@@ -101,7 +101,6 @@ body {
 }
 
 .buttons {
-	/* height: 80%;*/
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -112,7 +111,7 @@ body {
 	    -ms-flex-align: end;
 	        align-items: flex-end;
 
-	div {
+	& > div {
 		margin: 10px;
 		button { 
 			background-color: $buttons-color;
@@ -125,6 +124,7 @@ body {
 			box-shadow: 6px 6px 0px -5px rgba(0,0,0,0.75);
 			font-size: 25px;
 			cursor: pointer;
+			transition: all 0.3s;
 			@media #{$low400}{
 				width: 50px;
 				height: 50px;
@@ -138,11 +138,12 @@ body {
 	}
 }
 
-#revive {
+.revive-btn {
 	display: none;
 	margin: 10px auto;
 	padding: 20px 50px;
 	background-color: $reviveBtn-color;	
+	border: 0;
 	border-radius: 5px;
 	font-size: 20px;
 	-webkit-box-sizing: border-box;
@@ -166,21 +167,17 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 9.4px;
   cursor: default;
-  -webkit-box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-          box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   background: $range-color;
   border-radius: 1.3px;
   border: 0px solid $text-color;
 }
 input[type=range]::-webkit-slider-thumb {
-	-webkit-box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-	        box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
 	border: 1px solid #212121;
 	height: 13px;
 	width: 13px;
 	border-radius: 3px;
 	background: $thumb-color;
-	cursor: default;
+	cursor: pointer;
 	-webkit-appearance: none;
 	margin-top: -1.8px;
   	@media #{$low400}{

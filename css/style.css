@@ -1,10 +1,12 @@
 * {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+}
 
 body {
   color: #212121;
-  font-family: sans-serif; }
+  font-family: sans-serif;
+}
 
 .egg {
   display: -webkit-box;
@@ -25,18 +27,23 @@ body {
   width: 500px;
   height: 600px;
   background-color: #16a085;
-  border-radius: 50%  50%  50%  50%  / 60%   60%   40%  40%;
+  border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
   text-align: center;
   -webkit-box-shadow: inset -12px -12px 0px -1px rgba(0, 0, 0, 0.4);
-  box-shadow: inset -12px -12px 0px -1px rgba(0, 0, 0, 0.4); }
-  @media only screen and (max-width: 1024px) {
-    .egg {
-      width: 400px;
-      height: 500px; } }
-  @media only screen and (max-width: 400px) {
-    .egg {
-      width: 300px;
-      height: 400px; } }
+  box-shadow: inset -12px -12px 0px -1px rgba(0, 0, 0, 0.4);
+}
+@media only screen and (max-width: 1024px) {
+  .egg {
+    width: 400px;
+    height: 500px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .egg {
+    width: 300px;
+    height: 400px;
+  }
+}
 
 .screen {
   margin-top: 40px;
@@ -45,24 +52,32 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
   -webkit-box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6);
-  box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6); }
-  .screen .stats {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex; }
-    .screen .stats div {
-      margin: 10px;
-      display: -webkit-inline-box;
-      display: -ms-inline-flexbox;
-      display: inline-flex; }
-      @media only screen and (max-width: 400px) {
-        .screen .stats div {
-          margin: 5px; } }
-      .screen .stats div label {
-        margin-right: 7px; }
-        @media only screen and (max-width: 400px) {
-          .screen .stats div label {
-            margin-right: 3px; } }
+  box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6);
+}
+.screen .stats {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.screen .stats div {
+  margin: 10px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+@media only screen and (max-width: 400px) {
+  .screen .stats div {
+    margin: 5px;
+  }
+}
+.screen .stats div label {
+  margin-right: 7px;
+}
+@media only screen and (max-width: 400px) {
+  .screen .stats div label {
+    margin-right: 3px;
+  }
+}
 
 .animal {
   border-radius: 5px;
@@ -71,19 +86,24 @@ body {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.7);
   -webkit-box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6);
-  box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6); }
+  box-shadow: inset -5px -5px 0px -1px rgba(0, 0, 0, 0.6);
+}
+.animal img {
+  max-width: 130px;
+  padding: 10px;
+}
+@media only screen and (max-width: 1024px) {
   .animal img {
-    max-width: 130px;
-    padding: 10px; }
-    @media only screen and (max-width: 1024px) {
-      .animal img {
-        max-width: 95px; } }
-    @media only screen and (max-width: 400px) {
-      .animal img {
-        max-width: 80px; } }
+    max-width: 95px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .animal img {
+    max-width: 80px;
+  }
+}
 
 .buttons {
-  /* height: 80%;*/
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -92,76 +112,89 @@ body {
   justify-content: center;
   -webkit-box-align: end;
   -ms-flex-align: end;
-  align-items: flex-end; }
-  .buttons div {
-    margin: 10px; }
-    .buttons div button {
-      background-color: #FFEB3B;
-      margin: 5px;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      border: 0;
-      -webkit-box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
-      box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
-      font-size: 25px;
-      cursor: pointer; }
-      @media only screen and (max-width: 400px) {
-        .buttons div button {
-          width: 50px;
-          height: 50px;
-          margin: 10px 0; } }
-      .buttons div button:hover, .buttons div button:focus {
-        background-color: #FBC02D; }
+  align-items: flex-end;
+}
+.buttons > div {
+  margin: 10px;
+}
+.buttons > div button {
+  background-color: #FFEB3B;
+  margin: 5px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 0;
+  -webkit-box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 6px 6px 0px -5px rgba(0, 0, 0, 0.75);
+  font-size: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+@media only screen and (max-width: 400px) {
+  .buttons > div button {
+    width: 50px;
+    height: 50px;
+    margin: 10px 0;
+  }
+}
+.buttons > div button:hover, .buttons > div button:focus {
+  background-color: #FBC02D;
+}
 
-#revive {
+.revive-btn {
   display: none;
   margin: 10px auto;
   padding: 20px 50px;
   background-color: #FF9800;
+  border: 0;
   border-radius: 5px;
   font-size: 20px;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
-  #revive:hover {
-    background-color: #F57C00; }
+  box-sizing: border-box;
+}
+.revive-btn:hover {
+  background-color: #F57C00;
+}
 
 /*reset browser style on inputs and add custom*/
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
-  margin: 4px 0; }
+  margin: 4px 0;
+}
 
 input[type=range]:focus {
-  outline: none; }
+  outline: none;
+}
 
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 9.4px;
   cursor: default;
-  -webkit-box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   background: #ffc107;
   border-radius: 1.3px;
-  border: 0px solid #212121; }
+  border: 0px solid #212121;
+}
 
 input[type=range]::-webkit-slider-thumb {
-  -webkit-box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   border: 1px solid #212121;
   height: 13px;
   width: 13px;
   border-radius: 3px;
   background: #00BCD4;
-  cursor: default;
+  cursor: pointer;
   -webkit-appearance: none;
-  margin-top: -1.8px; }
-  @media only screen and (max-width: 400px) {
-    input[type=range]::-webkit-slider-thumb {
-      width: 5px; } }
+  margin-top: -1.8px;
+}
+@media only screen and (max-width: 400px) {
+  input[type=range]::-webkit-slider-thumb {
+    width: 5px;
+  }
+}
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #ffc107; }
+  background: #ffc107;
+}
 
 input[type=range]::-moz-range-track {
   width: 100%;
@@ -169,7 +202,8 @@ input[type=range]::-moz-range-track {
   cursor: default;
   background: #ffc107;
   border-radius: 1.3px;
-  border: 0px solid #212121; }
+  border: 0px solid #212121;
+}
 
 input[type=range]::-moz-range-thumb {
   border: 1px solid #212121;
@@ -177,10 +211,13 @@ input[type=range]::-moz-range-thumb {
   width: 13px;
   border-radius: 3px;
   background: #00BCD4;
-  cursor: default; }
-  @media only screen and (max-width: 400px) {
-    input[type=range]::-moz-range-thumb {
-      width: 5px; } }
+  cursor: default;
+}
+@media only screen and (max-width: 400px) {
+  input[type=range]::-moz-range-thumb {
+    width: 5px;
+  }
+}
 
 input[type=range]::-ms-track {
   width: 100%;
@@ -188,17 +225,20 @@ input[type=range]::-ms-track {
   cursor: default;
   background: transparent;
   border-color: transparent;
-  color: transparent; }
+  color: transparent;
+}
 
 input[type=range]::-ms-fill-lower {
   background: #ffc107;
   border: 0px solid #212121;
-  border-radius: 2.6px; }
+  border-radius: 2.6px;
+}
 
 input[type=range]::-ms-fill-upper {
   background: #ffc107;
   border: 0px solid #212121;
-  border-radius: 2.6px; }
+  border-radius: 2.6px;
+}
 
 input[type=range]::-ms-thumb {
   border: 1px solid #ffc107;
@@ -207,13 +247,18 @@ input[type=range]::-ms-thumb {
   border-radius: 3px;
   background: #00BCD4;
   cursor: default;
-  height: 9.4px; }
-  @media only screen and (max-width: 400px) {
-    input[type=range]::-ms-thumb {
-      width: 5px; } }
+  height: 9.4px;
+}
+@media only screen and (max-width: 400px) {
+  input[type=range]::-ms-thumb {
+    width: 5px;
+  }
+}
 
 input[type=range]:focus::-ms-fill-lower {
-  background: #ffc107; }
+  background: #ffc107;
+}
 
 input[type=range]:focus::-ms-fill-upper {
-  background: #ffc107; }
+  background: #ffc107;
+}
